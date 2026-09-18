@@ -2,7 +2,7 @@ const GEOCODING_URL = "https://geocoding-api.open-meteo.com/v1/search";
 const FORECAST_URL = "https://api.open-meteo.com/v1/forecast";
 
 export async function getCoordinates(cityName) {
-    const url = `${GEOCODING_URL}?name=${encodeURIComponent(cityName)}&count=1&language=th&format=json`;
+    const url = `${GEOCODING_URL}?name=${encodeURIComponent(cityName)}&count=1&language=auto&format=json`;
 
     const response = await fetch(url);
 
