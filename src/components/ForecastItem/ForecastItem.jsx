@@ -1,0 +1,23 @@
+import { getWeatherDescription } from "../../utils/weatherCodes";
+import styles from "./ForecastItem.module.css";
+
+function ForecastItem({ date, weatherCode, maxTemp, minTemp }) {
+    const formattedDate = new Date(date).toLocaleDateString("en-US", {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+    });
+
+    return (
+        <div className={styles.card}>
+        <p className={styles.date}>{formattedDate}</p>
+        <p className={styles.description}>{getWeatherDescription(weatherCode)}</p>
+        <div className={styles.temps}>
+            <span className={styles.maxTemp}>{Math.round(maxTemp)}°</span>
+            <span className={styles.minTemp}>{Math.round(minTemp)}°</span>
+        </div>
+        </div>
+    );
+}
+
+export default ForecastItem;

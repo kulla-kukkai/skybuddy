@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getWeatherByCity } from "../services/weatherApi";
 import WeatherDetail from "../components/WeatherDetail/WeatherDetail";
+import ForecastList from "../components/ForecastList/ForecastList";
 
 function CityDetailPage() {
     const { cityName } = useParams();
@@ -35,7 +36,10 @@ function CityDetailPage() {
         {isLoading && <p>Loading...</p>}
         {error && <p>Something went wrong, please try again later.</p>}
         {!isLoading && !error && city && (
+            <>
             <WeatherDetail city={city} />
+            <ForecastList daily={city.daily} />
+            </>
         )}
     </div>
     );
