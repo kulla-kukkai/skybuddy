@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getWeatherByCity } from "../services/weatherApi";
+import WeatherDetail from "../components/WeatherDetail/WeatherDetail";
 
 function CityDetailPage() {
     const { cityName } = useParams();
@@ -27,9 +28,6 @@ function CityDetailPage() {
         fetchCity();
     }, [cityName]);
 
-    if (isLoading) return <p>Loading...</p>;
-    if (error) return <p>Something went wrong, please try again later.</p>;
-
     return (
     <div>
         <Link to="/">← Back to Home</Link>
@@ -37,10 +35,7 @@ function CityDetailPage() {
         {isLoading && <p>Loading...</p>}
         {error && <p>Something went wrong, please try again later.</p>}
         {!isLoading && !error && city && (
-            <>
-            <h1>{city.name}</h1>
-            <p>Temperature: {city.current.temperature}°C</p>
-            </>
+            <WeatherDetail city={city} />
         )}
     </div>
     );
