@@ -1,9 +1,26 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const FavoritesContext = createContext();
 
+const STORAGE_KEY = "himlenidag-favorites";
+
+function loadInitialFavorites() {
+    try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+        return JSON.parse(stored);
+        }
+    } catch (err) {
+        console.error("Failed to load favorites from localStorage:", err);
+    }
+    return ["Stockholm", "Göteborg", "Malmö"]; 
+}
+
 export function FavoritesProvider({ children }) {
-    const [favorites, setFavorites] = useState(["Stockholm", "Göteborg", "Malmö"]);
+    const [favorites, setFavorites] = useState(loadInitialFavorites);
+    useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
+    }, [favorites]);
 
     function addFavorite(cityName) {
     setFavorites((prev) => [...prev, cityName]);
