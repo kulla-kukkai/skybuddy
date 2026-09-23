@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getWeatherByCity } from "../services/weatherApi";
+import { FavoritesContext } from "../context/FavoritesContext";
 import CityCard from "../components/CityCard";
 
-const CITY_NAMES = ["Stockholm", "Göteborg", "Malmö"];
-
 function HomePage() {
+    const { favorites } = useContext(FavoritesContext);
+
     const [cities, setCities] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -16,7 +17,7 @@ function HomePage() {
 
         try {
             const results = await Promise.all(
-            CITY_NAMES.map((name) => getWeatherByCity(name))
+            favorites.map((name) => getWeatherByCity(name))
             );
             setCities(results);
         } catch (err) {
@@ -27,17 +28,21 @@ function HomePage() {
         }
 
         fetchAllCities();
-    }, []);
-
-    if (isLoading) return <p>Loading...</p>;
-    if (error) return <p>Something went wrong, please try again later.</p>;
+    }, [favorites]);
 
     return (
-        <div>
+    <div>
         <h1>My Cities</h1>
-        {cities.map((city) => (
-            <CityCard key={city.name} city={city} />
-        ))}
+
+        {isLoading && <p>Loading...</p>}
+        {error && <p>Something went wrong, please try again later.</p>}
+        {!isLoading && !error && (
+            <div>
+            {cities.map((city) => (
+                <CityCard key={city.name} city={city} />
+            ))}
+            </div>
+        )}
         </div>
     );
 }
