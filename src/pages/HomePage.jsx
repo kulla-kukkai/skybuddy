@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { getWeatherByCity } from "../services/weatherApi";
 import { FavoritesContext } from "../context/FavoritesContext";
 import CityCard from "../components/CityCard";
+import CitySearchForm from "../components/CitySearchForm/CitySearchForm";
 
 function HomePage() {
     const { favorites } = useContext(FavoritesContext);
@@ -9,6 +10,7 @@ function HomePage() {
     const [cities, setCities] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
         async function fetchAllCities() {
@@ -33,6 +35,13 @@ function HomePage() {
     return (
     <div>
         <h1>My Cities</h1>
+
+        {showForm ? (
+            <CitySearchForm onClose={() => setShowForm(false)} />
+        ) : (
+            <button onClick={() => setShowForm(true)}>+ Add city</button>
+        )}
+
 
         {isLoading && <p>Loading...</p>}
         {error && <p>Something went wrong, please try again later.</p>}
