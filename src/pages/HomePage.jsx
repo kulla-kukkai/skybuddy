@@ -11,10 +11,9 @@ function HomePage() {
     const { favorites, removeFavorite } = useContext(FavoritesContext);
 
     const [activeCity, setActiveCity] = useState(null);
-    const [activeCityName, setActiveCityName] = useState(null); // null = โหมดตำแหน่งปัจจุบัน
+    const [activeCityName, setActiveCityName] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [showForm, setShowForm] = useState(false);
 
     const loadCurrentLocation = useCallback(() => {
         setIsLoading(true);
@@ -69,6 +68,8 @@ function HomePage() {
 
     return (
         <div className={styles.page}>
+        <CitySearchForm onAdded={(name) => loadCity(name)} />
+
         {isLoading && <p className={styles.status}>Loading...</p>}
         {error && !isLoading && <p className={styles.status}>{error}</p>}
 
@@ -113,13 +114,7 @@ function HomePage() {
                 </button>
             </div>
             ))}
-
-            <button className={styles.chip} onClick={() => setShowForm(true)}>
-            + Add
-            </button>
         </div>
-
-        {showForm && <CitySearchForm onClose={() => setShowForm(false)} />}
         </div>
     );
 }

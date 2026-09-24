@@ -3,7 +3,7 @@ import { FavoritesContext } from "../../context/FavoritesContext";
 import { getCoordinates } from "../../services/weatherApi";
 import styles from "./CitySearchForm.module.css";
 
-function CitySearchForm({ onClose }) {
+function CitySearchForm({ onAdded }) {
     const { favorites, addFavorite } = useContext(FavoritesContext);
 
     const [cityName, setCityName] = useState("");
@@ -35,7 +35,7 @@ function CitySearchForm({ onClose }) {
         const location = await getCoordinates(trimmedName);
         addFavorite(location.name);
         setCityName("");
-        onClose();
+        if (onAdded) onAdded(location.name); // แจ้ง parent ว่าเพิ่มเมืองไหนสำเร็จ
         } catch (err) {
         setError(err.message);
         } finally {
@@ -45,19 +45,19 @@ function CitySearchForm({ onClose }) {
 
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
-        <input
+        <div className={styles.inputWrapper}>
+            <span className={styles.searchIcon}>🔍</span>
+            <input
             type="text"
             value={cityName}
             onChange={(e) => setCityName(e.target.value)}
-            placeholder="Enter city name"
+            placeholder="Search city..."
             className={styles.input}
-        />
-        <button type="submit" disabled={isChecking} className={styles.submitButton}>
-            {isChecking ? "Checking..." : "Add"}
-        </button>
-        <button type="button" onClick={onClose} className={styles.cancelButton}>
-            Cancel
-        </button>
+            />
+            <button type="submit" disabled={isChecking} className={styles.submitButton}>
+            {isChecking ? "..." : "Add"}
+            </button>
+        </div>
 
         {error && <p className={styles.error}>{error}</p>}
         </form>
