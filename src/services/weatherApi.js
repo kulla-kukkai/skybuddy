@@ -23,8 +23,8 @@ export async function getCoordinates(cityName) {
 export async function getForecast(latitude, longitude) {
     const url =
         `${FORECAST_URL}?latitude=${latitude}&longitude=${longitude}` +
-        `&current_weather=true` +
-        `&daily=weathercode,temperature_2m_max,temperature_2m_min` +
+        `&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,weather_code` +
+        `&daily=weather_code,temperature_2m_max,temperature_2m_min` +
         `&timezone=auto`;
 
     const response = await fetch(url);
@@ -42,7 +42,20 @@ export async function getWeatherByCity(cityName) {
 
     return {
         ...location,
-        current: weather.current_weather,
+        current: weather.current,
+        daily: weather.daily,
+    };
+}
+
+export async function getWeatherByCoords(latitude, longitude, label = "Your location") {
+    const weather = await getForecast(latitude, longitude);
+
+    return {
+        name: label,
+        country: null,
+        latitude,
+        longitude,
+        current: weather.current,
         daily: weather.daily,
     };
 }
