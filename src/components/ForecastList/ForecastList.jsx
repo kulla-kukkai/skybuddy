@@ -8,13 +8,14 @@ function ForecastList({ daily }) {
         <div className={styles.list}>
         {time.map((date, index) => (
             <ForecastItem
-            key={date}
-            date={date}
-            weatherCode={weathercode[index]}
-            maxTemp={temperature_2m_max[index]}
-            minTemp={temperature_2m_min[index]}
+                key={date}
+                date={date}
+                weatherCode={weathercode[index]}
+                maxTemp={temperature_2m_max[index]}
+                minTemp={temperature_2m_min[index]}
+                isToday={index === 0}
             />
-        ))}
+            ))}
         </div>
     );
 }

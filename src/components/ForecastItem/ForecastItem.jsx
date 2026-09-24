@@ -1,12 +1,14 @@
 import { getWeatherDescription } from "../../utils/weatherCodes";
 import styles from "./ForecastItem.module.css";
 
-function ForecastItem({ date, weatherCode, maxTemp, minTemp }) {
-    const formattedDate = new Date(date).toLocaleDateString("en-US", {
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-    });
+function ForecastItem({ date, weatherCode, maxTemp, minTemp, isToday }) {
+    const formattedDate = isToday
+        ? "Today"
+        : new Date(date).toLocaleDateString("en-US", {
+            weekday: "short",
+            month: "short",
+            day: "numeric",
+        });
 
     return (
         <div className={styles.card}>
