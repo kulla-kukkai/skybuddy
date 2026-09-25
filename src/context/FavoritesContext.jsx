@@ -10,8 +10,8 @@ function loadInitialFavorites() {
         if (stored) {
         return JSON.parse(stored);
         }
-    } catch (err) {
-        console.error("Failed to load favorites from localStorage:", err);
+    } catch {
+
     }
     return ["Stockholm", "Göteborg", "Malmö"]; 
 }
