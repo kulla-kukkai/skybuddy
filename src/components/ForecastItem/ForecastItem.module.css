@@ -37,3 +37,9 @@
 .minTemp {
     color: var(--text-muted);
 }
+
+.icon {
+    width: 40px;
+    height: 40px;
+    margin: 0.35rem 0;
+}

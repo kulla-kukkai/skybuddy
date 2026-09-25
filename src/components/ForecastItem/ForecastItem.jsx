@@ -1,4 +1,4 @@
-import { getWeatherDescription } from "../../utils/weatherCodes";
+import { getWeatherDescription, getWeatherIcon } from "../../utils/weatherCodes";
 import styles from "./ForecastItem.module.css";
 
 function ForecastItem({ date, weatherCode, maxTemp, minTemp, isToday }) {
@@ -13,6 +13,13 @@ function ForecastItem({ date, weatherCode, maxTemp, minTemp, isToday }) {
     return (
         <div className={styles.card}>
         <p className={styles.date}>{formattedDate}</p>
+
+        <img
+            className={styles.icon}
+            src={`/src/assets/weather-icons/${getWeatherIcon(weatherCode)}.png`}
+            alt={getWeatherDescription(weatherCode)}
+        />
+
         <p className={styles.description}>{getWeatherDescription(weatherCode)}</p>
         <div className={styles.temps}>
             <span className={styles.maxTemp}>{Math.round(maxTemp)}°</span>
