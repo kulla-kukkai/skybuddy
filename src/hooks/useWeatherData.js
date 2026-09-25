@@ -10,15 +10,15 @@ function useWeatherData(initialCityName) {
     const loadCity = useCallback(async (name) => {
         setIsLoading(true);
         setError(null);
-        setCityLabel(name);
 
         try {
-        const result = await getWeatherByCity(name);
-        setCity(result);
+            const result = await getWeatherByCity(name);
+            setCity(result);
+            setCityLabel(result.name); // ใช้ชื่อที่ API แก้ให้ถูกต้องแล้ว แทนข้อความดิบที่พิมพ์เข้ามา
         } catch (err) {
-        setError(err.message);
+            setError(err.message);
         } finally {
-        setIsLoading(false);
+            setIsLoading(false);
         }
     }, []);
 
