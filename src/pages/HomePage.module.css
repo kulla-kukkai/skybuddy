@@ -6,6 +6,25 @@
   overflow-x: hidden;
 }
 
+.appName {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--text-main);
+  text-align: center;
+  margin: 1rem 0 0;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.cloudIcon {
+  width: 28px;
+  height: 18px;
+}
+
 .status {
   text-align: center;
   color: var(--text-main);

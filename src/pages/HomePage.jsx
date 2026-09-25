@@ -23,6 +23,21 @@ function HomePage() {
 
     return (
         <div className={`${styles.page} ${isNight ? "theme-night" : ""}`}>
+        
+        <h1 className={styles.appName}>
+            Skybuddy
+            <svg
+                className={styles.cloudIcon}
+                viewBox="0 0 64 40"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+            >
+                <ellipse cx="20" cy="26" rx="14" ry="12" fill="white" />
+                <ellipse cx="34" cy="16" rx="14" ry="14" fill="white" />
+                <ellipse cx="46" cy="24" rx="12" ry="11" fill="white" />
+                <rect x="12" y="22" width="42" height="14" rx="7" fill="white" />
+            </svg>
+        </h1>
         <CitySearchForm onSearch={loadCity} />
 
         {isLoading && <p className={styles.status}>Loading...</p>}

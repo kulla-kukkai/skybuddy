@@ -34,7 +34,7 @@ function CityDetailPage() {
         </div>
 
         {isLoading && <p className={styles.status}>Loading...</p>}
-        {error && <p className={styles.status}>Something went wrong, please try again later.</p>}
+        {error && <p className={styles.status}>{error}</p>}
         {!isLoading && !error && city && (
             <>
             <WeatherDetail
