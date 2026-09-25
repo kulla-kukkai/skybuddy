@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { FavoritesContext } from "../context/FavoritesContext";
 import useWeatherData from "../hooks/useWeatherData";
 import WeatherDetail from "../components/WeatherDetail/WeatherDetail";
-import ForecastList from "../components/ForecastList/ForecastList";
 import CitySearchForm from "../components/CitySearchForm/CitySearchForm";
 import CityChipList from "../components/CityChipList/CityChipList";
 import styles from "./HomePage.module.css";
@@ -35,7 +34,6 @@ function HomePage() {
                 city={city}
                 onSave={isUnsavedSearchResult ? () => addFavorite(cityLabel) : undefined}
             />
-            <ForecastList daily={city.daily} />
             </>
         )}
 
