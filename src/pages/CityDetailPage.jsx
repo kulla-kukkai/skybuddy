@@ -8,9 +8,9 @@ import CityStats from "../components/CityStats/CityStats";
 import styles from "./CityDetailPage.module.css";
 
 function CityDetailPage() {
-const { cityName } = useParams();
+    const { cityName } = useParams();
     const navigate = useNavigate();
-    const { favorites, removeFavorite } = useContext(FavoritesContext);
+    const { favorites, addFavorite, removeFavorite } = useContext(FavoritesContext);
     const { city, isLoading, error } = useWeatherData(cityName);
 
     function handleRemove() {
@@ -20,10 +20,8 @@ const { cityName } = useParams();
 
     const isFavorite = favorites.includes(cityName);
 
-    const isNight = city && city.current.is_day === 0;
-
     return (
-        <div className={`${styles.page} ${isNight ? "theme-night" : ""}`}>
+        <div className={styles.page}>
         <div className={styles.topBar}>
             <Link to="/" className={styles.backLink}>← Back</Link>
 
@@ -38,7 +36,10 @@ const { cityName } = useParams();
         {error && <p className={styles.status}>Something went wrong, please try again later.</p>}
         {!isLoading && !error && city && (
             <>
-            <WeatherDetail city={city} />
+            <WeatherDetail
+                city={city}
+                onSave={!isFavorite && cityName ? () => addFavorite(cityName) : undefined}
+            />
             <CityStats daily={city.daily} />
             <ForecastList daily={city.daily} />
             </>
