@@ -58,6 +58,8 @@
 @media (max-width: 480px) {
     .topBar {
         padding: 0.75rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
     }
 
     .backLink {

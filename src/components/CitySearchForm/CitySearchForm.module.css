@@ -48,10 +48,15 @@
 @media (max-width: 480px) {
   .wrapper {
     padding: 0.75rem 0.75rem 0;
+    margin-bottom: 0.75rem; 
   }
 
   .inputWrapper {
     padding: 0.5rem 0.75rem;
+  }
+
+  .searchIcon {
+    font-size: 0.9rem;
   }
 
   .input {
