@@ -1,66 +1,94 @@
 import { useState, useContext } from "react";
 import { FavoritesContext } from "../../context/FavoritesContext";
-import { getCoordinates } from "../../services/weatherApi";
+import { getWeatherByCity } from "../../services/weatherApi";
+import { getWeatherDescription } from "../../utils/weatherCodes";
 import styles from "./CitySearchForm.module.css";
 
 function CitySearchForm({ onAdded }) {
     const { favorites, addFavorite } = useContext(FavoritesContext);
 
     const [cityName, setCityName] = useState("");
+    const [preview, setPreview] = useState(null);
+    const [isSearching, setIsSearching] = useState(false);
     const [error, setError] = useState(null);
-    const [isChecking, setIsChecking] = useState(false);
 
-    async function handleSubmit(e) {
+    async function handleSearch(e) {
         e.preventDefault();
 
         const trimmedName = cityName.trim();
-
         if (!trimmedName) {
         setError("Please enter a city name");
+        setPreview(null);
         return;
         }
 
-        const isDuplicate = favorites.some(
-        (name) => name.toLowerCase() === trimmedName.toLowerCase()
-        );
-        if (isDuplicate) {
-        setError("This city is already in your list");
-        return;
-        }
-
-        setIsChecking(true);
+        setIsSearching(true);
         setError(null);
+        setPreview(null);
 
         try {
-        const location = await getCoordinates(trimmedName);
-        addFavorite(location.name);
-        setCityName("");
-        if (onAdded) onAdded(location.name); // แจ้ง parent ว่าเพิ่มเมืองไหนสำเร็จ
+        const result = await getWeatherByCity(trimmedName);
+        setPreview(result);
         } catch (err) {
-        setError(err.message);
+        setError(err.message); 
         } finally {
-        setIsChecking(false);
+        setIsSearching(false);
         }
     }
 
+    function handleAdd() {
+        addFavorite(preview.name);
+        onAdded(preview.name);
+        setCityName("");
+        setPreview(null);
+    }
+
+    const isDuplicate =
+        preview && favorites.some((name) => name.toLowerCase() === preview.name.toLowerCase());
+
     return (
-        <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.inputWrapper}>
+        <div className={styles.wrapper}>
+        <form onSubmit={handleSearch} className={styles.form}>
+            <div className={styles.inputWrapper}>
             <span className={styles.searchIcon}>🔍</span>
             <input
-            type="text"
-            value={cityName}
-            onChange={(e) => setCityName(e.target.value)}
-            placeholder="Search city..."
-            className={styles.input}
+                id="city-search-input"
+                type="text"
+                value={cityName}
+                onChange={(e) => setCityName(e.target.value)}
+                placeholder="Search city..."
+                className={styles.input}
             />
-            <button type="submit" disabled={isChecking} className={styles.submitButton}>
-            {isChecking ? "..." : "Add"}
+            <button type="submit" disabled={isSearching} className={styles.submitButton}>
+                {isSearching ? "..." : "Search"}
             </button>
-        </div>
+            </div>
+        </form>
 
         {error && <p className={styles.error}>{error}</p>}
-        </form>
+
+        {preview && (
+            <div className={styles.previewCard}>
+            <div>
+                <p className={styles.previewName}>
+                {preview.name}
+                {preview.country && <span className={styles.previewCountry}>, {preview.country}</span>}
+                </p>
+                <p className={styles.previewDesc}>
+                {Math.round(preview.current.temperature_2m)}° · {getWeatherDescription(preview.current.weather_code)}
+                </p>
+            </div>
+
+            {isDuplicate ? (
+                <span className={styles.alreadyAdded}>Already saved</span>
+            ) : (
+                <button onClick={handleAdd} className={styles.addButton}>
+                + Add
+                </button>
+            )}
+            </div>
+        )}
+        </div>
     );
 }
 
