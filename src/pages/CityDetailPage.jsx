@@ -1,11 +1,15 @@
-import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { getWeatherByCity } from "../services/weatherApi";
+import { FavoritesContext } from "../context/FavoritesContext";
 import WeatherDetail from "../components/WeatherDetail/WeatherDetail";
 import ForecastList from "../components/ForecastList/ForecastList";
+import styles from "./CityDetailPage.module.css";
 
 function CityDetailPage() {
     const { cityName } = useParams();
+    const navigate = useNavigate();
+    const { favorites, removeFavorite } = useContext(FavoritesContext);
 
     const [city, setCity] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -29,19 +33,34 @@ function CityDetailPage() {
         fetchCity();
     }, [cityName]);
 
-    return (
-    <div>
-        <Link to="/">← Back to Home</Link>
+    function handleRemove() {
+        removeFavorite(cityName);
+        navigate("/");
+    }
 
-        {isLoading && <p>Loading...</p>}
-        {error && <p>Something went wrong, please try again later.</p>}
+    const isFavorite = favorites.includes(cityName);
+
+    return (
+        <div className={styles.page}>
+        <div className={styles.topBar}>
+            <Link to="/" className={styles.backLink}>← Back to Home</Link>
+
+            {isFavorite && (
+            <button onClick={handleRemove} className={styles.removeButton}>
+                Remove from favorites
+            </button>
+            )}
+        </div>
+
+        {isLoading && <p className={styles.status}>Loading...</p>}
+        {error && <p className={styles.status}>Something went wrong, please try again later.</p>}
         {!isLoading && !error && city && (
             <>
             <WeatherDetail city={city} />
             <ForecastList daily={city.daily} />
             </>
         )}
-    </div>
+        </div>
     );
 }
 

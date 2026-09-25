@@ -88,7 +88,7 @@ function HomePage() {
 
         {activeCityName && (
             <Link to={`/city/${activeCityName}`} className={styles.detailLink}>
-            See full forecast →
+            Manage this city
             </Link>
         )}
 
