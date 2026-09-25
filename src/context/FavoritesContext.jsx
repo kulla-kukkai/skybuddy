@@ -13,7 +13,7 @@ function loadInitialFavorites() {
     } catch {
 
     }
-    return ["Stockholm", "Göteborg", "Malmö"]; 
+    return ["Stockholm", "New York", "Bangkok"]; 
 }
 
 export function FavoritesProvider({ children }) {
