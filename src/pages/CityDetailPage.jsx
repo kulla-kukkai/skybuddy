@@ -1,38 +1,17 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { getWeatherByCity } from "../services/weatherApi";
 import { FavoritesContext } from "../context/FavoritesContext";
+import useWeatherData from "../hooks/useWeatherData";
 import WeatherDetail from "../components/WeatherDetail/WeatherDetail";
 import ForecastList from "../components/ForecastList/ForecastList";
 import CityStats from "../components/CityStats/CityStats";
 import styles from "./CityDetailPage.module.css";
 
 function CityDetailPage() {
-    const { cityName } = useParams();
+const { cityName } = useParams();
     const navigate = useNavigate();
     const { favorites, removeFavorite } = useContext(FavoritesContext);
-
-    const [city, setCity] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        async function fetchCity() {
-        setIsLoading(true);
-        setError(null);
-
-        try {
-            const result = await getWeatherByCity(cityName);
-            setCity(result);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setIsLoading(false);
-        }
-        }
-
-        fetchCity();
-    }, [cityName]);
+    const { city, isLoading, error } = useWeatherData(cityName);
 
     function handleRemove() {
         removeFavorite(cityName);
