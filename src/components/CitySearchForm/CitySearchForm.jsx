@@ -3,11 +3,18 @@ import styles from "./CitySearchForm.module.css";
 
 function CitySearchForm({ onSearch }) {
     const [cityName, setCityName] = useState("");
+    const [validationError, setValidationError] = useState(null);
 
     function handleSubmit(e) {
         e.preventDefault();
         const trimmedName = cityName.trim();
-        if (!trimmedName) return;
+
+        if (!trimmedName) {
+        setValidationError("Please enter a city name");
+        return;
+        }
+
+        setValidationError(null);
         onSearch(trimmedName);
     }
 
@@ -20,7 +27,10 @@ function CitySearchForm({ onSearch }) {
                 id="city-search-input"
                 type="text"
                 value={cityName}
-                onChange={(e) => setCityName(e.target.value)}
+                onChange={(e) => {
+                setCityName(e.target.value);
+                if (validationError) setValidationError(null); 
+                }}
                 placeholder="Search city..."
                 className={styles.input}
             />
@@ -29,6 +39,8 @@ function CitySearchForm({ onSearch }) {
             </button>
             </div>
         </form>
+
+        {validationError && <p className={styles.error}>{validationError}</p>}
         </div>
     );
 }

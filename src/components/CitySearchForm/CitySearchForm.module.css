@@ -45,6 +45,13 @@
   cursor: pointer;
 }
 
+.error {
+  color: #d9534f;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0;
+  padding-left: 0.5rem;
+}
+
 @media (max-width: 480px) {
   .wrapper {
     padding: 0.75rem 0.75rem 0;
