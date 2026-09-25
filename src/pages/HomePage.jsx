@@ -5,6 +5,7 @@ import { FavoritesContext } from "../context/FavoritesContext";
 import WeatherDetail from "../components/WeatherDetail/WeatherDetail";
 import ForecastList from "../components/ForecastList/ForecastList";
 import CitySearchForm from "../components/CitySearchForm/CitySearchForm";
+import CityChipList from "../components/CityChipList/CityChipList";
 import styles from "./HomePage.module.css";
 
 function HomePage() {
@@ -62,6 +63,11 @@ function HomePage() {
         }
     }
 
+    function handleRemoveCity(name) {
+        removeFavorite(name);
+        if (activeCityName === name) loadCurrentLocation();
+    }
+
     useEffect(() => {
         loadCurrentLocation();
     }, [loadCurrentLocation]);
@@ -86,35 +92,13 @@ function HomePage() {
             </Link>
         )}
 
-        <div className={styles.chipRow}>
-            <button
-            className={`${styles.chip} ${!activeCityName ? styles.chipActive : ""}`}
-            onClick={loadCurrentLocation}
-            >
-            📍 Current
-            </button>
-
-            {favorites.map((name) => (
-            <div key={name} className={styles.chipWrapper}>
-                <button
-                className={`${styles.chip} ${activeCityName === name ? styles.chipActive : ""}`}
-                onClick={() => loadCity(name)}
-                >
-                {name}
-                </button>
-                <button
-                className={styles.chipRemove}
-                onClick={() => {
-                    removeFavorite(name);
-                    if (activeCityName === name) loadCurrentLocation();
-                }}
-                aria-label={`Remove ${name}`}
-                >
-                ×
-                </button>
-            </div>
-            ))}
-        </div>
+        <CityChipList
+            favorites={favorites}
+            activeCityName={activeCityName}
+            onSelectCity={loadCity}
+            onSelectCurrent={loadCurrentLocation}
+            onRemoveCity={handleRemoveCity}
+        />
         </div>
     );
 }
