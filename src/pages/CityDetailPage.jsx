@@ -4,6 +4,7 @@ import { getWeatherByCity } from "../services/weatherApi";
 import { FavoritesContext } from "../context/FavoritesContext";
 import WeatherDetail from "../components/WeatherDetail/WeatherDetail";
 import ForecastList from "../components/ForecastList/ForecastList";
+import CityStats from "../components/CityStats/CityStats";
 import styles from "./CityDetailPage.module.css";
 
 function CityDetailPage() {
@@ -57,6 +58,7 @@ function CityDetailPage() {
         {!isLoading && !error && city && (
             <>
             <WeatherDetail city={city} />
+            <CityStats daily={city.daily} />
             <ForecastList daily={city.daily} />
             </>
         )}
