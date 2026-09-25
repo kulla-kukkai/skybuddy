@@ -44,3 +44,22 @@
   font-size: 0.8rem;
   cursor: pointer;
 }
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 0.75rem 0.75rem 0;
+  }
+
+  .inputWrapper {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .input {
+    font-size: 0.9rem;
+  }
+
+  .submitButton {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.75rem;
+  }
+}

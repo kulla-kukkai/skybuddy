@@ -39,3 +39,29 @@
   font-family: var(--font-heading);
   font-size: 1.1rem;
 }
+
+@media (max-width: 480px) {
+  .container {
+    margin: 0;
+    border-radius: 0;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .label {
+    font-size: 1rem;
+  }
+
+  .value {
+    font-size: 1.4rem;
+  }
+
+}

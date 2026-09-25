@@ -97,3 +97,64 @@
   font-weight: 700;
   font-family: var(--font-heading);
 }
+
+@media (max-width: 480px) {
+  .container {
+    margin: 0;
+    border-radius: 0;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .cityName {
+    font-size: 1.8rem;
+  }
+
+  .country {
+    font-size: 1.2rem;
+  }
+
+  .dateTime {
+    font-size: 1rem;
+  }
+
+  .temperature {
+    font-size: 7rem;
+  }
+
+  .icon {
+    width: 220px;
+    height: 220px;
+  }
+
+  .description {
+    font-size: 1.6rem;
+  }
+
+  .statsRow {
+    flex-direction: column; 
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  .stat {
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 1.25rem;
+  }
+
+  .statLabel {
+    font-size: 1.3rem;
+  }
+
+  .statValue {
+    font-size: 1.8rem;
+  }
+
+  .saveButton {
+    width: 52px;
+    height: 52px;
+    font-size: 1.8rem;
+  }
+}

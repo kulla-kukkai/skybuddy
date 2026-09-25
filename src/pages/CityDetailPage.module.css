@@ -3,6 +3,7 @@
     background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom) 60%);
     padding-bottom: 2rem;
     transition: background 0.6s ease;
+    overflow-x: hidden;
 }
 
 .status {
@@ -52,4 +53,19 @@
 .status {
     text-align: center;
     padding: 2rem;
+}
+
+@media (max-width: 480px) {
+    .topBar {
+        padding: 0.75rem;
+    }
+
+    .backLink {
+        font-size: 0.9rem;
+    }
+
+    .removeButton {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.7rem;
+    }
 }

@@ -21,8 +21,16 @@
 
 .list {
     display: flex;
-    justify-content: center;
-    gap: 2rem;
+    justify-content: safe center;
+    gap: 0.75rem;
     overflow-x: auto;
     padding-bottom: 0.5rem;
+}
+
+@media (max-width: 480px) {
+    .wrapper {
+    margin: 0;
+    border-radius: 0;
+    padding: 1rem;
+    }
 }

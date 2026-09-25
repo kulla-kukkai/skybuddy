@@ -3,6 +3,7 @@
   background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom) 60%);
   padding-bottom: 2rem;
   transition: background 0.6s ease;
+  overflow-x: hidden;
 }
 
 .status {

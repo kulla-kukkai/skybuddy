@@ -43,3 +43,27 @@
     height: 40px;
     margin: 0.35rem 0;
 }
+
+@media (max-width: 480px) {
+    .card {
+        min-width: 110px;
+        padding: 1rem;
+    }
+
+    .icon {
+        width: 52px;
+        height: 52px;
+    }
+
+    .date {
+        font-size: 1rem;
+    }
+
+    .description {
+        font-size: 0.9rem;
+    }
+
+    .temps {
+        font-size: 1.2rem;
+    }
+}

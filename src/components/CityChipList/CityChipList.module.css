@@ -73,3 +73,20 @@
     opacity: 1;
     pointer-events: auto;
 }
+
+@media (max-width: 480px) {
+    .heading {
+        margin: 0 0.75rem 0.5rem;
+    }
+
+    .chipRow {
+        padding: 0.75rem;
+        flex-wrap: wrap;
+        overflow-x: visible;
+    }
+
+    .chip {
+        font-size: 0.9rem;
+        padding: 0.45rem 0.9rem;
+    }
+}
