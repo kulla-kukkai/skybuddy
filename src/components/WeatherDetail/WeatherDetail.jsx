@@ -21,7 +21,7 @@ function WeatherDetail({ city, onSave }) {
   return (
     <div className={styles.container}>
       {onSave && (
-        <button onClick={onSave} className={styles.saveButton} aria-label="Save to My Cities">
+        <button onClick={onSave} className={styles.saveButton} title="Save to My Cities" aria-label="Save to My Cities">
           +
         </button>
       )}

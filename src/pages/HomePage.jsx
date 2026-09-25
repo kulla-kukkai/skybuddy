@@ -29,25 +29,19 @@ function HomePage() {
         {isLoading && <p className={styles.status}>Loading...</p>}
         {error && !isLoading && <p className={styles.status}>{error}</p>}
 
-        {isUnsavedSearchResult && (
-            <div className={styles.saveBanner}>
-            <span>New city — not saved yet</span>
-            <button onClick={() => addFavorite(cityLabel)} className={styles.saveButton}>
-                + Save to My Cities
-            </button>
-            </div>
-        )}
-
         {!isLoading && !error && city && (
             <>
-            <WeatherDetail city={city} />
+            <WeatherDetail
+                city={city}
+                onSave={isUnsavedSearchResult ? () => addFavorite(cityLabel) : undefined}
+            />
             <ForecastList daily={city.daily} />
             </>
         )}
 
         {cityLabel && !isLoading && !error && (
             <Link to={`/city/${cityLabel}`} className={styles.detailLink}>
-            More details →
+            See details →
             </Link>
         )}
 
