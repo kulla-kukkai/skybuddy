@@ -20,14 +20,16 @@ const { cityName } = useParams();
 
     const isFavorite = favorites.includes(cityName);
 
+    const isNight = city && city.current.is_day === 0;
+
     return (
-        <div className={styles.page}>
+        <div className={`${styles.page} ${isNight ? "theme-night" : ""}`}>
         <div className={styles.topBar}>
-            <Link to="/" className={styles.backLink}>← Back to Home</Link>
+            <Link to="/" className={styles.backLink}>← Back</Link>
 
             {isFavorite && (
             <button onClick={handleRemove} className={styles.removeButton}>
-                Remove from favorites
+                Remove from the list
             </button>
             )}
         </div>

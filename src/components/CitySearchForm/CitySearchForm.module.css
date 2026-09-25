@@ -1,52 +1,3 @@
-.inputWrapper {
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 999px;
-  padding: 0.6rem 1rem;
-  gap: 0.5rem;
-}
-
-.searchIcon {
-  opacity: 0.8;
-}
-
-.input {
-  flex: 1;
-  border: none;
-  background: none;
-  outline: none;
-  color: white;
-  font-size: 1rem;
-}
-
-.input::placeholder {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.submitButton {
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  border-radius: 999px;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.85rem;
-  cursor: pointer;
-  color: #2a4d7a;
-  font-weight: bold;
-}
-
-.submitButton:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.error {
-  color: #ffe1e1;
-  font-size: 0.85rem;
-  margin: 0.5rem 0 0;
-  padding-left: 0.5rem;
-}
-
 .wrapper {
   padding: 1rem 1rem 0;
 }
@@ -55,47 +6,102 @@
   margin-bottom: 0;
 }
 
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  gap: 0.5rem;
+  box-shadow: var(--shadow);
+}
+
+.input {
+  flex: 1;
+  border: none;
+  background: none;
+  outline: none;
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.submitButton {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .previewCard {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
   padding: 0.75rem 1rem;
   margin-top: 0.5rem;
+  color: var(--text-main);
 }
 
 .previewName {
-  font-weight: bold;
+  font-family: var(--font-heading);
+  font-weight: 700;
   margin: 0;
-  color: #2a4d7a;
 }
 
 .previewCountry {
   font-weight: normal;
-  color: #888;
+  color: var(--text-muted);
 }
 
 .previewDesc {
   margin: 0.15rem 0 0;
   font-size: 0.85rem;
-  color: #666;
+  color: var(--text-muted);
 }
 
 .addButton {
-  background-color: #2f6f4e;
+  background-color: var(--accent);
   color: white;
   border: none;
   border-radius: 999px;
   padding: 0.4rem 1rem;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 700;
   flex-shrink: 0;
 }
 
 .alreadyAdded {
   font-size: 0.85rem;
-  color: #888;
+  color: var(--text-muted);
   font-style: italic;
   flex-shrink: 0;
+}
+
+.error {
+  color: #d9534f;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0;
+  padding-left: 0.5rem;
 }

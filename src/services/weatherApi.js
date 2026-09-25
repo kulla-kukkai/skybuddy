@@ -22,10 +22,10 @@ export async function getCoordinates(cityName) {
 
 export async function getForecast(latitude, longitude) {
     const url =
-        `${FORECAST_URL}?latitude=${latitude}&longitude=${longitude}` +
-        `&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,weather_code` +
-        `&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,precipitation_probability_max` +
-        `&timezone=auto`;
+    `${FORECAST_URL}?latitude=${latitude}&longitude=${longitude}` +
+    `&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,weather_code,is_day` +
+    `&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,precipitation_probability_max` +
+    `&timezone=auto`;
 
     const response = await fetch(url);
 

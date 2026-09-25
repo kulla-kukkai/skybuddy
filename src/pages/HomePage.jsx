@@ -16,9 +16,12 @@ function HomePage() {
         removeFavorite(name);
         if (cityLabel === name) loadCurrentLocation();
     }
-
+    
+    const isNight = city && city.current.is_day === 0;
+    
     return (
-        <div className={styles.page}>
+        
+        <div className={`${styles.page} ${isNight ? "theme-night" : ""}`}>
         <CitySearchForm onAdded={(name) => loadCity(name)} />
 
         {isLoading && <p className={styles.status}>Loading...</p>}
