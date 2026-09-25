@@ -19,9 +19,10 @@ function CityDetailPage() {
     }
 
     const isFavorite = favorites.includes(cityName);
+    const isNight = city && city.current.is_day === 0;
 
     return (
-        <div className={styles.page}>
+    <div className={`${styles.page} ${isNight ? "theme-night" : ""}`}>
         <div className={styles.topBar}>
             <Link to="/" className={styles.backLink}>← Back</Link>
 
