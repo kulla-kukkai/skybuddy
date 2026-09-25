@@ -15,7 +15,6 @@ function CityStats({ daily }) {
 
     return (
         <div className={styles.container}>
-        <h3 className={styles.title}>Today's details</h3>
         <div className={styles.grid}>
             <div className={styles.stat}>
             <span className={styles.label}>Sunrise</span>
