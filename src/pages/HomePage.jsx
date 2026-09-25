@@ -20,8 +20,10 @@ function HomePage() {
     const isUnsavedSearchResult =
         cityLabel && !isLoading && !error && !favorites.includes(cityLabel);
 
+    const isNight = city && city.current.is_day === 0;
+
     return (
-        <div className={styles.page}>
+        <div className={`${styles.page} ${isNight ? "theme-night" : ""}`}>
         <CitySearchForm onSearch={loadCity} />
 
         {isLoading && <p className={styles.status}>Loading...</p>}
@@ -45,7 +47,7 @@ function HomePage() {
 
         {cityLabel && !isLoading && !error && (
             <Link to={`/city/${cityLabel}`} className={styles.detailLink}>
-            Manage this city →
+            More details →
             </Link>
         )}
 

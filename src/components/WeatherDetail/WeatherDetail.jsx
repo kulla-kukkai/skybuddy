@@ -1,12 +1,35 @@
 import { getWeatherDescription, getWeatherIcon } from "../../utils/weatherCodes";
 import styles from "./WeatherDetail.module.css";
 
-function WeatherDetail({ city }) {
+function formatDateTime(isoString) {
+  const date = new Date(isoString);
+  const dateText = date.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+  const timeText = date.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  return `${dateText} · ${timeText}`;
+}
+
+function WeatherDetail({ city, onSave }) {
   const { name, country, current } = city;
 
   return (
     <div className={styles.container}>
+      {onSave && (
+        <button onClick={onSave} className={styles.saveButton} aria-label="Save to My Cities">
+          +
+        </button>
+      )}
+
       <h2 className={styles.cityName}>{name}</h2>
+      {country && <p className={styles.country}>{country}</p>}
+
+      <p className={styles.dateTime}>{formatDateTime(current.time)}</p>
 
       <img
         className={styles.icon}
