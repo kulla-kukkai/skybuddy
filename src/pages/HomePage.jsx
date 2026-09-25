@@ -9,23 +9,32 @@ import CityChipList from "../components/CityChipList/CityChipList";
 import styles from "./HomePage.module.css";
 
 function HomePage() {
-    const { favorites, removeFavorite } = useContext(FavoritesContext);
+    const { favorites, addFavorite, removeFavorite } = useContext(FavoritesContext);
     const { city, cityLabel, isLoading, error, loadCity, loadCurrentLocation } = useWeatherData();
 
     function handleRemoveCity(name) {
         removeFavorite(name);
         if (cityLabel === name) loadCurrentLocation();
     }
-    
-    const isNight = city && city.current.is_day === 0;
-    
+
+    const isUnsavedSearchResult =
+        cityLabel && !isLoading && !error && !favorites.includes(cityLabel);
+
     return (
-        
-        <div className={`${styles.page} ${isNight ? "theme-night" : ""}`}>
-        <CitySearchForm onAdded={(name) => loadCity(name)} />
+        <div className={styles.page}>
+        <CitySearchForm onSearch={loadCity} />
 
         {isLoading && <p className={styles.status}>Loading...</p>}
         {error && !isLoading && <p className={styles.status}>{error}</p>}
+
+        {isUnsavedSearchResult && (
+            <div className={styles.saveBanner}>
+            <span>New city — not saved yet</span>
+            <button onClick={() => addFavorite(cityLabel)} className={styles.saveButton}>
+                + Save to My Cities
+            </button>
+            </div>
+        )}
 
         {!isLoading && !error && city && (
             <>
@@ -34,7 +43,7 @@ function HomePage() {
             </>
         )}
 
-        {cityLabel && (
+        {cityLabel && !isLoading && !error && (
             <Link to={`/city/${cityLabel}`} className={styles.detailLink}>
             Manage this city →
             </Link>
