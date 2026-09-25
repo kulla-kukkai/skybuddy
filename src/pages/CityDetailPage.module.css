@@ -30,9 +30,17 @@
 }
 
 .backLink {
-    color: inherit;
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-main);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
 }
 
 .removeButton {
