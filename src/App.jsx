@@ -9,6 +9,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/current" element={<CityDetailPage />} />
           <Route path="/city/:cityName" element={<CityDetailPage />} />
         </Routes>
       </BrowserRouter>

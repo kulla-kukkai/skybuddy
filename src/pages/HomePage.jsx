@@ -37,12 +37,14 @@ function HomePage() {
             </>
         )}
 
-        {cityLabel && !isLoading && !error && (
-            <Link to={`/city/${cityLabel}`} className={styles.detailLink}>
-            See details →
+        {!isLoading && !error && city && (
+            <Link
+                to={cityLabel ? `/city/${cityLabel}` : "/current"}
+                className={styles.detailLink}
+            >
+                View full forecast →
             </Link>
         )}
-
         <CityChipList
             favorites={favorites}
             activeCityName={cityLabel}
