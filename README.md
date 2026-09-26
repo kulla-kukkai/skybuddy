@@ -3,7 +3,6 @@
 **A weather app with a memory.** Skybuddy remembers the cities you care about, greets you with your own local forecast the moment you open it, and quietly shifts from day to night right along with the sky outside your window.
 
 **🔗 Live app:** [skybuddy-silk.vercel.app](https://skybuddy-silk.vercel.app/)
-**📦 Repository:** [github.com/kulla-kukkai/skybuddy](https://github.com/kulla-kukkai/skybuddy)
 
 ---
 
@@ -128,17 +127,6 @@ npm run dev
 
 Then open the URL it prints (usually `http://localhost:5173`) in your browser. When the browser asks for location access, allowing it gets you the full experience — declining it still works fine, you just land in "pick a saved city" mode instead.
 
-## How to try it out
-
-A few things worth testing deliberately, since they're easy to miss on a quick glance:
-
-- **Search for a city that doesn't exist** (try mashing the keyboard) — you should get a clear "couldn't find that" message, not a blank screen or a crash
-- **Submit the search box empty** — it should tell you to type something rather than silently doing nothing
-- **Add a city, then reload the whole page** — it should still be in your list
-- **Add a city, then remove it** — from either the chip's hover-to-reveal × button, or the "Remove from the list" button on its detail page
-- **Check a city on the opposite side of the world from you** — if it's nighttime there, the whole page should shift into its dark theme, independent of what time it actually is where you are
-- **Shrink the browser window (or open it on a phone)** — layout, tap targets, and the forecast strip should all adapt cleanly
-
 ## Requirements checklist
 
 **Godkänd (G)**
@@ -165,14 +153,10 @@ A few things worth testing deliberately, since they're easy to miss on a quick g
 
 Weather data courtesy of [Open-Meteo](https://open-meteo.com/), free for non-commercial use, no API key required.
 
-Weather icons from [Flaticon](https://www.flaticon.com/) — *[replace this line with the exact attribution text from your Flaticon download page, e.g. "Icons made by [Author Name] from www.flaticon.com"]*.
+Weather icons from [Flaticon](https://www.flaticon.com/)
 
 ## A few honest limitations
 
 - Reverse geocoding isn't implemented, so "current location" is labeled generically rather than with an actual city name
 - No dedicated tests suite — testing was manual throughout, guided by the checklist above
 - The 7-day forecast view is read-only; tapping into a specific day for deeper detail was prototyped during development but ultimately cut in favor of a simpler, calmer interface
-
----
-
-Built solo over one very eventful week, with more `console.log` debugging sessions than I'd like to admit and at least one bug that turned out to be a missing `<meta>` tag.
