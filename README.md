@@ -16,7 +16,7 @@ Every city also has its own detail page, reachable through routing, with a fulle
 
 ## Screenshots
 
-![Skybuddy on desktop and mobile](./screenshots.png)
+<img src="./screenshots.png" alt="Skybuddy on desktop and mobile" width="850" />
 
 ## Features
 
@@ -59,7 +59,6 @@ Skybuddy uses three routes, all handled by `react-router-dom` with no full-page 
 
 ```
 src/
-├── assets/            # SVGs and other static assets
 ├── components/        # Presentational building blocks, one folder each
 │   ├── CitySearchForm/
 │   ├── CityChipList/
@@ -89,13 +88,13 @@ The split isn't arbitrary: `services/` never touches state or JSX, `hooks/` neve
 
 ## Architecture
 
-![Architecture overview](./architecture.png)
+<img src="./architecture.png" alt="Architecture overview" width="800" />
 
 Data flows one way, top to bottom: the API is only ever called from `services/weatherApi.js`, which knows nothing about React. `useWeatherData` wraps that service in state (`loading`, `error`, `city`) and is the only place that logic lives, shared by both pages. `FavoritesContext` runs independently alongside it, syncing to `localStorage` on every change — a deliberate separation between "the weather I'm currently looking at" (local to a page, via the hook) and "the cities I've saved" (global, via Context).
 
 ## User flow & error handling
 
-![User flow and error handling](./user-flow.png)
+<img src="./user-flow.png" alt="User flow and error handling" width="800" />
 
 Every error state shown to the user is deliberate, not a fallback for something that was missed:
 
