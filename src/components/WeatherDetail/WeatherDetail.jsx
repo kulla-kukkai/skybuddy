@@ -32,9 +32,9 @@ function WeatherDetail({ city, onSave }) {
       <p className={styles.dateTime}>{formatDateTime(current.time)}</p>
 
       <img
-        className={styles.icon}
-        src={`/src/assets/weather-icons/${getWeatherIcon(current.weather_code)}.png`}
-        alt={getWeatherDescription(current.weather_code)}
+      className={styles.icon}
+      src={`/weather-icons/${getWeatherIcon(current.weather_code)}.png`}
+      alt={getWeatherDescription(current.weather_code)}
       />
 
       <p className={styles.temperature}>{Math.round(current.temperature_2m)}°</p>

@@ -15,9 +15,9 @@ function ForecastItem({ date, weatherCode, maxTemp, minTemp, isToday }) {
         <p className={styles.date}>{formattedDate}</p>
 
         <img
-            className={styles.icon}
-            src={`/src/assets/weather-icons/${getWeatherIcon(weatherCode)}.png`}
-            alt={getWeatherDescription(weatherCode)}
+        className={styles.icon}
+        src={`/weather-icons/${getWeatherIcon(weatherCode)}.png`}
+        alt={getWeatherDescription(weatherCode)}
         />
 
         <p className={styles.description}>{getWeatherDescription(weatherCode)}</p>
