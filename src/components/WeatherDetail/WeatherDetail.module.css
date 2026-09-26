@@ -50,6 +50,7 @@
   text-transform: uppercase;
   opacity: 0.85;
   margin: 0;
+  max-width: calc(100% - 110px);
 }
 
 .country {
@@ -160,5 +161,9 @@
 
   .statValue {
     font-size: 1.2rem;
+  }
+
+  .cityName {
+    max-width: calc(100% - 90px);
   }
 }
