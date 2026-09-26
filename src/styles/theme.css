@@ -10,6 +10,10 @@
 
     --font-heading: "Quicksand", sans-serif;
     --font-body: "Nunito", sans-serif;
+
+    --save-btn-border: #e0c73a;
+    --save-btn-bg: rgb(248, 243, 201);
+    --save-btn-text: #e4c824;
 }
 
 .theme-night {
@@ -21,6 +25,10 @@
     --text-muted: #c7c9e0;
     --accent: #8fa8d9;
     --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+    --save-btn-border: #ffd166;
+    --save-btn-bg: rgba(255, 209, 102, 0.15);
+    --save-btn-text: #ffd166;
 }
 
 body {

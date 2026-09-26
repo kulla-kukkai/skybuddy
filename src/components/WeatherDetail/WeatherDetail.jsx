@@ -20,21 +20,29 @@ function WeatherDetail({ city, onSave }) {
 
   return (
     <div className={styles.container}>
-      {onSave && (
-        <button onClick={onSave} className={styles.saveButton} title="Save to My Cities" aria-label="Save to My Cities">
-          + Save
-        </button>
-      )}
+      <div className={styles.headerRow}>
+        <div className={styles.sideSlot} />
 
-      <h2 className={styles.cityName}>{name}</h2>
-      {country && <p className={styles.country}>{country}</p>}
+        <div className={styles.nameBlock}>
+          <h2 className={styles.cityName}>{name}</h2>
+          {country && <p className={styles.country}>{country}</p>}
+        </div>
+
+        <div className={styles.sideSlot}>
+          {onSave && (
+            <button onClick={onSave} className={styles.saveButton} title="Save to My Cities" aria-label="Save to My Cities">
+              + Save
+            </button>
+          )}
+        </div>
+      </div>
 
       <p className={styles.dateTime}>{formatDateTime(current.time)}</p>
 
       <img
-      className={styles.icon}
-      src={`/weather-icons/${getWeatherIcon(current.weather_code)}.png`}
-      alt={getWeatherDescription(current.weather_code)}
+        className={styles.icon}
+        src={`/weather-icons/${getWeatherIcon(current.weather_code)}.png`}
+        alt={getWeatherDescription(current.weather_code)}
       />
 
       <p className={styles.temperature}>{Math.round(current.temperature_2m)}°</p>
