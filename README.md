@@ -16,7 +16,7 @@ Every city also has its own detail page, reachable through routing, with a fulle
 
 ## Screenshots
 
-<img src="./screenshots.png" alt="Skybuddy on desktop and mobile" width="750" />
+<img src="./screenshots.png" alt="Skybuddy on desktop and mobile" width="850" />
 
 ## Features
 
@@ -83,11 +83,11 @@ public/
 
 ## Architecture
 
-<img src="./architecture.png" alt="Architecture overview" width="750" />
+<img src="./architecture.png" alt="Architecture overview" width="850" />
 
 ## User flow & error handling
 
-<img src="./user-flow.png" alt="User flow and error handling" width="750" />
+<img src="./user-flow.png" alt="User flow and error handling" width="850" />
 
 Every error state shown to the user is deliberate:
 
