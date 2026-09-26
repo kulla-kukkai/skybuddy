@@ -1,6 +1,6 @@
 # ☁️ Skybuddy
 
-**A weather app with a memory.** Skybuddy remembers the cities you care about, greets you with your own local forecast the moment you open it, and quietly shifts from day to night right along with the sky outside your window.
+**A weather app with a memory.** Skybuddy remembers the cities you care about, greets you with your own local forecast the moment you open it, and quietly shifts from day to night right along with the sky outside your window.And even when you're far away from home, Skybuddy keeps you close to the places and people you miss.
 
 **🔗 Live app:** [skybuddy-silk.vercel.app](https://skybuddy-silk.vercel.app/)
 
@@ -8,7 +8,7 @@
 
 ## What is this?
 
-Skybuddy is a single-page weather dashboard built for the JS3 *Examinerande projektarbete*. Open it and it immediately asks for your location, pulls live weather for wherever you are, and shows it inside a soft, glass-like card that changes color palette depending on whether it's day or night at that location — a small detail, but one that makes the app feel alive rather than static.
+Skybuddy is a single-page weather dashboard. Open it and it immediately asks for your location, pulls live weather for wherever you are, and shows it inside a soft, glass-like card that changes color palette depending on whether it's day or night at that location.
 
 From there you can search any city in the world, preview its weather instantly, and save it to your own list with one tap. Saved cities live in a horizontally scrolling chip bar at the bottom of the screen, so switching between "how's the weather at home" and "how's the weather where my friend lives" takes exactly one click — no page reload, no waiting.
 
@@ -27,7 +27,6 @@ Every city also has its own detail page, reachable through routing, with a fulle
 - 🌗 **Day/night theming** — the entire color palette shifts based on the actual time of day *at the city you're viewing*, not your own local time
 - 📅 **7-day forecast** with sunrise, sunset, UV index, and rain chance on each city's detail page
 - 📱 **Fully responsive** — designed mobile-first with a glassmorphism aesthetic, tested on real devices, not just DevTools
-- 🎨 **Hand-picked weather icons** replacing generic emoji, matched to the app's pastel color scheme
 - 🧭 **Live URL for every city** — `/city/Sydney` is a real, shareable address, not just an in-memory state change
 
 ## Routing
@@ -40,8 +39,6 @@ Skybuddy uses three routes, all handled by `react-router-dom` with no full-page 
 | `/current` | `CityDetailPage` | Full detail view for your current geolocation — same layout as below, just without a city name in the URL |
 | `/city/:cityName` | `CityDetailPage` | Full detail view for one specific saved or searched city: sunrise/sunset, UV index, rain chance, and the 7-day forecast strip |
 
-`HomePage` and `CityDetailPage` are genuinely different views, not the same content duplicated: the dashboard is built for glancing quickly and switching cities fast, while the detail page is built for reading — one city, no distractions, plus the extra stats the dashboard deliberately leaves out. Both pull data through the same `useWeatherData` hook, so `/city/Sydney` and clicking the "Sydney" chip on `/` always agree with each other.
-
 ## Tech stack
 
 | Layer | Choice |
@@ -50,9 +47,9 @@ Skybuddy uses three routes, all handled by `react-router-dom` with no full-page 
 | Routing | React Router |
 | Shared state | React Context (`FavoritesContext`) |
 | Data fetching | Custom hook (`useWeatherData`) + native `fetch` |
-| Weather data | [Open-Meteo](https://open-meteo.com/) — Geocoding API + Forecast API (free, no API key required) |
+| Weather data | [Open-Meteo](https://open-meteo.com/) — Geocoding API + Forecast API |
 | Persistence | `localStorage` |
-| Styling | CSS Modules, no UI framework |
+| Styling | CSS Modules |
 | Deployment | Vercel |
 
 ## Project structure
@@ -84,19 +81,15 @@ public/
 └── weather-icons/       # weather icon set, served as static assets
 ```
 
-The split isn't arbitrary: `services/` never touches state or JSX, `hooks/` never touches the DOM directly, and every visible piece of UI is a component with exactly one job. Two pages share the same data-fetching hook instead of duplicating logic — the difference between the dashboard and the detail view is purely what each one *does* with the same data.
-
 ## Architecture
 
-<img src="./architecture.png" alt="Architecture overview" width="800" />
-
-Data flows one way, top to bottom: the API is only ever called from `services/weatherApi.js`, which knows nothing about React. `useWeatherData` wraps that service in state (`loading`, `error`, `city`) and is the only place that logic lives, shared by both pages. `FavoritesContext` runs independently alongside it, syncing to `localStorage` on every change — a deliberate separation between "the weather I'm currently looking at" (local to a page, via the hook) and "the cities I've saved" (global, via Context).
+<img src="./architecture.png" alt="Architecture overview" width="850" />
 
 ## User flow & error handling
 
-<img src="./user-flow.png" alt="User flow and error handling" width="800" />
+<img src="./user-flow.png" alt="User flow and error handling" width="850" />
 
-Every error state shown to the user is deliberate, not a fallback for something that was missed:
+Every error state shown to the user is deliberate:
 
 | Situation | What the user sees |
 |---|---|
@@ -142,20 +135,14 @@ Then open the URL it prints (usually `http://localhost:5173`) in your browser. W
 
 **Väl godkänd (VG)** — all five extra criteria met:
 
-- [x] **Extended error handling** — distinct empty states and network-failure messages, written in plain language rather than technical jargon
+- [x] **Extended error handling** — distinct empty states and network-failure messages 
 - [x] **Thoughtful architecture** — a shared custom hook (`useWeatherData`), reusable presentational components, and a hard line between data-fetching and rendering
-- [x] **Responsive design** — verified on an actual phone, not only browser emulation (which, in one memorable debugging session, turned out to be lying to me)
+- [x] **Responsive design** — verified on an actual phone, not only browser emulation 
 - [x] **Extended functionality beyond the brief** — geolocation, a full favorites system, day/night theming, and sunrise/sunset/UV/rain-chance detail data
-- [x] **A real commit history** — small, descriptive commits made throughout the week, not one dump at the end
+- [x] **A real commit history** — small, descriptive commits made throughout the weeks
 
 ## Credits
 
 Weather data courtesy of [Open-Meteo](https://open-meteo.com/), free for non-commercial use, no API key required.
 
 Weather icons from [Flaticon](https://www.flaticon.com/)
-
-## A few honest limitations
-
-- Reverse geocoding isn't implemented, so "current location" is labeled generically rather than with an actual city name
-- No dedicated tests suite — testing was manual throughout, guided by the checklist above
-- The 7-day forecast view is read-only; tapping into a specific day for deeper detail was prototyped during development but ultimately cut in favor of a simpler, calmer interface
