@@ -8,7 +8,7 @@
 
 ## What is this?
 
-Skybuddy is a single-page weather dashboard built for the JS3 *Examinerande projektarbete*. Open it and it immediately asks for your location, pulls live weather for wherever you are, and shows it inside a soft, glass-like card that changes color palette depending on whether it's day or night at that location — a small detail, but one that makes the app feel alive rather than static.
+Skybuddy is a single-page weather dashboard. Open it and it immediately asks for your location, pulls live weather for wherever you are, and shows it inside a soft, glass-like card that changes color palette depending on whether it's day or night at that location.
 
 From there you can search any city in the world, preview its weather instantly, and save it to your own list with one tap. Saved cities live in a horizontally scrolling chip bar at the bottom of the screen, so switching between "how's the weather at home" and "how's the weather where my friend lives" takes exactly one click — no page reload, no waiting.
 
@@ -16,7 +16,7 @@ Every city also has its own detail page, reachable through routing, with a fulle
 
 ## Screenshots
 
-<img src="./screenshots.png" alt="Skybuddy on desktop and mobile" width="850" />
+<img src="./screenshots.png" alt="Skybuddy on desktop and mobile" width="750" />
 
 ## Features
 
@@ -83,13 +83,13 @@ public/
 
 ## Architecture
 
-<img src="./architecture.png" alt="Architecture overview" width="800" />
+<img src="./architecture.png" alt="Architecture overview" width="750" />
 
 ## User flow & error handling
 
-<img src="./user-flow.png" alt="User flow and error handling" width="800" />
+<img src="./user-flow.png" alt="User flow and error handling" width="750" />
 
-Every error state shown to the user is deliberate, not a fallback for something that was missed:
+Every error state shown to the user is deliberate:
 
 | Situation | What the user sees |
 |---|---|
